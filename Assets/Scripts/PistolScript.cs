@@ -11,12 +11,13 @@ public class PistolScript : MonoBehaviour {
     public int ammo;
     public int maxAmountOfBullits;
     public int clip;
+    public int maxclip;
     // Use this for initialization
     void Start()
     {
        
         player = GameObject.Find("player");
-       
+        clip = maxclip;
     }
 
     // Update is called once per frame
@@ -49,21 +50,31 @@ public class PistolScript : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            
-            for (int i = 0; ammo < maxAmountOfBullits; i++)
+            if (clip > 0)
             {
-                if (clip <= 0)
+                for (int i = 0; i < maxAmountOfBullits; i++)
                 {
-                    ammo = ammo + 1;
-                    clip = clip - 1;
+                    if (clip > 0 && ammo < maxAmountOfBullits)
+                    {
+                        ammo = ammo + 1;
+                        clip = clip - 1;
+                    }
                 }
             }
         }
 
 
+       
 
 
-
+    }
+    public void SetClip(int Clip)
+    {
+        clip = Clip;
+    }
+    public int GetMaxClip()
+    {
+        return maxclip;
     }
 }
 
